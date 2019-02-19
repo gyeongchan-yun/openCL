@@ -16,7 +16,6 @@ void handle_compile_error(cl_int status, cl_program program, cl_device_id device
     if (status == CL_BUILD_PROGRAM_FAILURE) {
         size_t log_size;
         char *log;
-        cl_int status;
 
         // Get log size
         status = clGetProgramBuildInfo(program, device_id, 
@@ -27,9 +26,8 @@ void handle_compile_error(cl_int status, cl_program program, cl_device_id device
         // Get log 
         status = clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, log_size, log, NULL);
         handle_error(status);
-        printf("log size: %d\n", &log_size);
         log[log_size] = '\0';
-        printf("log size: %d\n", &log_size); 
+
         printf("Compile error: %s\n", log);
 
         free(log);
